@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--<GridPane fx:controller="sample.Controller"-->
+<!--          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">-->
+<!--</GridPane>-->
+
+<VBox fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml">
+    <HBox>
+        <Button mnemonicParsing="false" text="Button" />
+        <Button mnemonicParsing="false" text="Button" />
+        <TableView></TableView>
+        <TableView></TableView>
+    </HBox>
+</VBox>
