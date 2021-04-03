@@ -10,7 +10,7 @@ import java.util.concurrent.*;
 
 public class Server {
 
-    private final static int PORT = 13337;
+    private final static int PORT = 4999;
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(4);
 

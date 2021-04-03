@@ -1,10 +1,18 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Main extends Application {
 
@@ -24,9 +32,25 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        Button downloadButton = new Button("Download");
+        Button uploadButton = new Button("Upload");
+        ListView<String> list1 = new ListView<>();
+        ListView<String> list2 = new ListView<>();
+
+        HBox hbox1 = new HBox(downloadButton,uploadButton);
+        HBox hbox2 = new HBox(list1,list2);
+        VBox vbox = new VBox(hbox1,hbox2);
+        File clientDir = new File("shared");
+        File serverDir = new File("C:\\Downloads\\SERVER");
+        ObservableList<String> items1 = FXCollections.observableArrayList (clientDir.list());
+        ObservableList<String> items2 = FXCollections.observableArrayList (serverDir.list());
+        list1.setItems(items1);
+        list2.setItems(items2);
+
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Assignment 2");
-        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.setScene(new Scene(vbox, 500, 500));
         primaryStage.show();
     }
 
