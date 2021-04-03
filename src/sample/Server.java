@@ -65,7 +65,9 @@ public class Server {
                 fin.read(fileBytes);
                 out.println(file.getName()); // OUT: FILE NAME
                 out.println(length); // OUT: ARRAY LENGTH
-                os.write(fileBytes); // OUT: BYTE ARRAY
+                System.out.println("e");
+                os.write(fileBytes,0,length); // OUT: BYTE ARRAY
+
                 System.out.println("File sent");
             }
         }

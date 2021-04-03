@@ -55,15 +55,16 @@ public class Client {
             } else if (keyboard.startsWith("DOWNLOAD")) {
 
                 // Receive file from server
-                System.out.println("Receiving file: " + keyboard.replace("DOWNLOAD ", ""));
+                //System.out.println("Receiving file: " + keyboard.replace("DOWNLOAD ", ""));
                 String fileName = in.readLine(); // IN: FILE NAME
                 FileOutputStream fout = new FileOutputStream(DIRECTORY+"\\"+fileName);
                 InputStream is = s.getInputStream();
                 int length = Integer.parseInt(in.readLine()); // IN: ARRAY LENGTH
-                System.out.println("LENGTH " + length);
+                //System.out.println("LENGTH " + length);
                 byte[] fileBytes = new byte[length];
-                is.read(fileBytes); // IN: BYTE ARRAY
+                is.read(fileBytes,0, length); // IN: BYTE ARRAY
                 fout.write(fileBytes, 0, length);
+                //fout.write(fileBytes, 0, length);
                 System.out.println("File received");
 
             }
