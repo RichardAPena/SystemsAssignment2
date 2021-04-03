@@ -13,7 +13,7 @@ public class Client {
     private final static String DIRECTORY = "C:\\Downloads\\CLIENT";
 
     public static void main(String[] args) throws IOException {
-        Socket s = new Socket(HOST, PORT);
+        Socket s = new Socket("184.144.79.242", 13337);
         //ClientHandler client = new ClientHandler(s); // TODO: idk make this do something
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);
