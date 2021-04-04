@@ -44,7 +44,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        String keyboard = "";
         Socket s = new Socket("localhost", PORT);
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);
@@ -106,6 +106,59 @@ public class Main extends Application {
         });
 
         downloadButton.setOnAction(e -> {
+            try {
+                Socket socket = new Socket("localhost", PORT);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            try {
+                BufferedReader inn = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            try {
+                PrintWriter outt = new PrintWriter(s.getOutputStream(), true);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            out.println("DOWNLOAD" + selectedItem2);
+            // Receive file from server
+            String fileName = null; // IN: FILE NAME
+            try {
+                fileName = in.readLine();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            FileOutputStream fout = null;
+            try {
+                fout = new FileOutputStream(clientDir+"\\"+fileName);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
+            InputStream is = null;
+            try {
+                is = s.getInputStream();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            int length = 0; // IN: ARRAY LENGTH
+            try {
+                length = Integer.parseInt(in.readLine());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            byte[] fileBytes = new byte[length];
+            try {
+                is.read(fileBytes,0, length); // IN: BYTE ARRAY
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            try {
+                fout.write(fileBytes, 0, length);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            System.out.println("File received");
 
 
         });
