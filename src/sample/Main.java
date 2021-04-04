@@ -118,11 +118,17 @@ public class Main extends Application {
                 // Receive file from server
                 String fileName = in.readLine(); // IN: FILE NAME
                 FileOutputStream fout = new FileOutputStream(clientDir + "\\" + fileName);
+                System.out.println("1");
                 InputStream is = s.getInputStream();
+                System.out.println("2");
                 int length = Integer.parseInt(in.readLine()); // IN: ARRAY LENGTH
+                System.out.println("3");
                 byte[] fileBytes = new byte[length];
+                System.out.println("4");
                 is.read(fileBytes,0, length); // IN: BYTE ARRAY
+                System.out.println("5");
                 fout.write(fileBytes, 0, length);
+                System.out.println("6");
                 System.out.println("File received");
             } catch (Exception error) {
                 error.printStackTrace();
