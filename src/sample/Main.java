@@ -111,12 +111,12 @@ public class Main extends Application {
                 BufferedReader inn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter outt = new PrintWriter(socket.getOutputStream(), true);
 
-                outt.println("DOWNLOAD" + selectedItem2);
+                outt.println("DOWNLOAD " + selectedItem2);
                 // Receive file from server
-                String fileName = null; // IN: FILE NAME
+                String fileName = selectedItem2; // IN: FILE NAME
                 fileName = inn.readLine();
 
-                FileOutputStream fout = null;
+                FileOutputStream fout = new FileOutputStream(clientDir+"\\"+fileName);
                 fout = new FileOutputStream(clientDir+"\\"+fileName);
                 InputStream is = socket.getInputStream();
                 is = socket.getInputStream();
