@@ -8,16 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 
 public class Main extends Application {
 
@@ -40,17 +36,22 @@ public class Main extends Application {
     public String selectedItem2;
     public File clientDir = new File("shared");
     public File serverDir = new File("C:\\Downloads\\SERVER");
+    public TextArea preview1 = new TextArea();
+    public TextArea preview2 = new TextArea();
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        preview1.setEditable(false);
+        preview2.setEditable(false);
         Button downloadButton = new Button("Download");
         Button uploadButton = new Button("Upload");
         ListView<String> list1 = new ListView<>();
         ListView<String> list2 = new ListView<>();
+        list1.setPrefWidth(300);
+        list2.setPrefWidth(300);
         Label label1 = new Label("Selected client side item:");
         Label label2 = new Label("Selected server side item:");
         HBox hbox1 = new HBox(downloadButton,uploadButton);
-        HBox hbox2 = new HBox(list1,list2);
+        HBox hbox2 = new HBox(list1,list2,preview1,preview2);
         VBox vbox = new VBox(hbox1,hbox2,label1,label2);
 
 
@@ -64,12 +65,33 @@ public class Main extends Application {
             index2 = list1.getSelectionModel().getSelectedIndex();
             label1.setText("Selected item: " + selectedItem1);
             System.out.println("Item selected : " + selectedItem1 + ", Item index : " + index1);
+            preview1.appendText("Client side file preview:");
+            try (BufferedReader reader = new BufferedReader(new FileReader(new File("shared\\"+selectedItem1)))) {
+
+                String line;
+                while ((line = reader.readLine()) != null)
+                    preview1.appendText("\n"+line);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         list2.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
             selectedItem2 = list2.getSelectionModel().getSelectedItem();
             index1 = list2.getSelectionModel().getSelectedIndex();
             label2.setText("Selected client side item: " + selectedItem2);
             System.out.println("Item server side selected : " + selectedItem2 + ", Item index : " + index2);
+            preview2.setText("");
+            preview2.setText("Server side file preview:");
+            try (BufferedReader reader = new BufferedReader(new FileReader(new File("C:\\Downloads\\SERVER\\"+selectedItem2)))) {
+
+                String line;
+                while ((line = reader.readLine()) != null)
+                    preview2.appendText("\n" + line);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         downloadButton.setOnAction(e -> {
@@ -85,7 +107,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Assignment 2");
-        primaryStage.setScene(new Scene(vbox, 800, 500));
+        primaryStage.setScene(new Scene(vbox, 900, 500));
         primaryStage.show();
     }
 
