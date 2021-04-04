@@ -9,11 +9,9 @@ import java.util.concurrent.Executors;
 public class Server {
 
     private final static int PORT = 4999;
-    //private static ArrayList<ClientHandler> clients = new ArrayList<>();
-    //private static ExecutorService pool = Executors.newFixedThreadPool(4);
+
     private static ArrayList<ServerConnection> connections = new ArrayList<>();
 
-    //private final static String FILENAME = "C:\\Downloads\\test.txt";
     public final static String DIRECTORY = "C:\\Downloads\\SERVER";
     private static boolean shouldRun = true;
 

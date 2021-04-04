@@ -35,7 +35,7 @@ public class Main extends Application {
     public String selectedItem1;
     public String selectedItem2;
     public File clientDir = new File("shared");
-    public File serverDir = new File("C:\\Downloads\\SERVER");
+    public static File serverDir = new File("C:\\Downloads\\SERVER");
     public TextArea preview1 = new TextArea();
     public TextArea preview2 = new TextArea();
     @Override

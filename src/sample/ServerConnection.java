@@ -8,10 +8,7 @@ public class ServerConnection extends Thread {
     Socket s;
     BufferedReader in;
     PrintWriter out;
-    //FileInputStream fin;
-    //FileOutputStream fout;
-    //DataInputStream din;
-    //DataOutputStream dout;
+
     boolean shouldRun = true;
 
     public ServerConnection(Socket socket) throws IOException {
@@ -19,29 +16,25 @@ public class ServerConnection extends Thread {
         this.s = socket;
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
-        //fin = new FileInputStream(socket.getInputStream());
-        //fout = new FileOutputStream(socket.getOutputStream());
     }
 
     public void run() {
-
         try {
-        String request = "";
-
-        while (!request.equals("quit")) {
-            /*
-             RESPOND TO:
-             DIR
-             UPLOAD filename
-             DOWNLOAD filename
-             */
+            String request = "";
 
             request = in.readLine();
             System.out.println("REQUEST: " + request);
             if (request.equals("DIR")) {
 
+                //File serverDirectory = new File(Main.serverDir);
                 // Send client file list information
-                out.println("bruh.txt:mihai.txt:e.png");
+                String[] filesList = Main.serverDir.list();
+                String fileString = "";
+                for (int i=0; i<filesList.length; i++) {
+                    fileString += filesList[i];
+                    if (i<filesList.length-1) fileString += ":";
+                }
+                out.println(fileString);
 
             } else if (request.startsWith("UPLOAD")) {
 
@@ -73,7 +66,7 @@ public class ServerConnection extends Thread {
                 os.write(fileBytes, 0, length); // OUT: BYTE ARRAY
 
                 System.out.println("File sent");
-            }
+
         }
     } catch (Exception e) {}
 
