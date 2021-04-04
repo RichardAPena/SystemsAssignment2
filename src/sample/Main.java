@@ -135,18 +135,18 @@ public class Main extends Application {
         uploadButton.setOnAction(e -> {
             try {
                 Socket socket = new Socket("localhost", PORT);
-                BufferedReader inu = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                //BufferedReader inu = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter outu = new PrintWriter(socket.getOutputStream(), true);
-                out.println("UPLOAD" + selectedItem1);
-                System.out.println("Sending file: " + keyboard.replace("UPLOAD ", ""));
-                File file = new File(keyboard.replace("UPLOAD ",""));
-                FileInputStream fin = new FileInputStream(keyboard.replace("UPLOAD ",""));
-                OutputStream os = s.getOutputStream();
+                outu.println("UPLOAD " + selectedItem1);
+                //System.out.println("Sending file: " + keyboard.replace("UPLOAD ", ""));
+                File file = new File(clientDir+"\\"+selectedItem1);
+                FileInputStream fin = new FileInputStream(clientDir+"\\"+selectedItem1);
+                OutputStream os = socket.getOutputStream();
                 int length = (int) file.length();
                 byte[] fileBytes = new byte[length];
                 fin.read(fileBytes);
-                out.println(file.getName()); // OUT: FILE NAME
-                out.println(length); // OUT: ARRAY LENGTH
+                outu.println(file.getName()); // OUT: FILE NAME
+                outu.println(length); // OUT: ARRAY LENGTH
                 os.write(fileBytes); // OUT: BYTE ARRAY
                 System.out.println("File sent");
             } catch (Exception error) {
@@ -154,8 +154,6 @@ public class Main extends Application {
             }
 
         });
-
-
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Assignment 2");
