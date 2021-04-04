@@ -78,7 +78,8 @@ public class Main extends Application {
             index2 = list1.getSelectionModel().getSelectedIndex();
             label1.setText("Selected item: " + selectedItem1);
             System.out.println("Item selected : " + selectedItem1 + ", Item index : " + index1);
-            preview1.appendText("Client side file preview:");
+            preview1.setText("");
+            preview1.setText("Client side file preview:");
             try (BufferedReader reader = new BufferedReader(new FileReader(clientDir+ "\\" + selectedItem1))) {
 
                 String line;
@@ -93,7 +94,7 @@ public class Main extends Application {
         list2.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
             selectedItem2 = list2.getSelectionModel().getSelectedItem();
             index1 = list2.getSelectionModel().getSelectedIndex();
-            label2.setText("Selected client side item: " + selectedItem2);
+            label2.setText("Selected server side item: " + selectedItem2);
             System.out.println("Item server side selected : " + selectedItem2 + ", Item index : " + index2);
             preview2.setText("");
             preview2.setText("Server side file preview:");
@@ -110,6 +111,10 @@ public class Main extends Application {
 
         downloadButton.setOnAction(e -> {
             try {
+                File f = new File(clientDir + "\\" + selectedItem2);
+                if (f.delete()){
+                    System.out.println("deleet");
+                }
                 Socket s = new Socket("localhost", PORT);
                 BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 PrintWriter out = new PrintWriter(s.getOutputStream(), true);
@@ -118,10 +123,6 @@ public class Main extends Application {
                 // Receive file from server
                 String fileName = in.readLine(); // IN: FILE NAME
                 FileOutputStream fout = new FileOutputStream(clientDir + "\\" + fileName);
-                File f = new File(clientDir + "\\" + fileName);
-                if( f.exists()){
-                    f.delete();
-                }
                 System.out.println("1");
                 InputStream is = s.getInputStream();
                 System.out.println("2");
@@ -129,15 +130,23 @@ public class Main extends Application {
                 System.out.println("3");
                 byte[] fileBytes = new byte[length];
                 System.out.println("4");
+                System.out.println(length);
                 is.read(fileBytes,0, length); // IN: BYTE ARRAY
                 System.out.println("5");
                 fout.write(fileBytes, 0, length);
                 System.out.println("6");
                 System.out.println("File received");
+
+                fout.close();
+                is.close();
+                in.close();
+                out.close();
+
+
             } catch (Exception error) {
                 error.printStackTrace();
             }
-            System.out.println("File received");
+            System.out.println("dun");
 
         });
 

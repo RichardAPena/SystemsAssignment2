@@ -66,6 +66,10 @@ public class Client {
                 fout.write(fileBytes, 0, length);
                 //fout.write(fileBytes, 0, length);
                 System.out.println("File received");
+                in.close();
+                out.close();
+
+
 
             }
         }
