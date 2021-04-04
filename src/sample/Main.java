@@ -32,7 +32,7 @@ public class Main extends Application {
     the server.
     */
     private final static String HOST = "localhost";
-    private final static int PORT = 13337;
+    private final static int PORT = 4999;
     public int index1;
     public int index2;
     public String selectedItem1;
