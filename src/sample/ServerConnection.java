@@ -10,8 +10,8 @@ public class ServerConnection extends Thread {
     PrintWriter out;
     //FileInputStream fin;
     //FileOutputStream fout;
-    DataInputStream din;
-    DataOutputStream dout;
+    //DataInputStream din;
+    //DataOutputStream dout;
     boolean shouldRun = true;
 
     public ServerConnection(Socket socket) throws IOException {
@@ -25,21 +25,20 @@ public class ServerConnection extends Thread {
 
     public void run() {
         try {
-            din = new DataInputStream(socket.getInputStream());
-            dout = new DataOutputStream(socket.getOutputStream());
 
-            while (shouldRun) {
-                while (din.available() == 0) {
-                    Thread.sleep(1);
-                }
+            //din = new DataInputStream(socket.getInputStream());
+            //dout = new DataOutputStream(socket.getOutputStream());
+
+            //while (shouldRun) {
+                //while (din.available() == 0) {
+                //    Thread.sleep(1);
+                //}
                 //String textIn = din.readUTF();
                 //sendStringToClient(textIn);
-            }
-            din.close();
-            dout.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+            //}
+            //din.close();
+            //dout.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

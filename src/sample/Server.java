@@ -27,6 +27,7 @@ public class Server {
             while (shouldRun) {
                 Socket s = ss.accept();
                 ServerConnection sc = new ServerConnection(s);
+                sc.start();
                 System.out.println("Client accepted");
                 connections.add(sc);
             }
