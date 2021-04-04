@@ -113,10 +113,10 @@ public class Main extends Application {
 
                 outt.println("DOWNLOAD " + selectedItem2);
                 // Receive file from server
-                String fileName = selectedItem2; // IN: FILE NAME
-                fileName = inn.readLine();
+                String fileName = inn.readLine(); // IN: FILE NAME
+                //fileName = ;
 
-                FileOutputStream fout = new FileOutputStream(clientDir+"\\"+fileName);
+                FileOutputStream fout = new FileOutputStream(clientDir + "\\" + fileName);
                 fout = new FileOutputStream(clientDir+"\\"+fileName);
                 InputStream is = socket.getInputStream();
                 is = socket.getInputStream();
@@ -135,12 +135,11 @@ public class Main extends Application {
         uploadButton.setOnAction(e -> {
             try {
                 Socket socket = new Socket("localhost", PORT);
-                //BufferedReader inu = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter outu = new PrintWriter(socket.getOutputStream(), true);
                 outu.println("UPLOAD " + selectedItem1);
-                //System.out.println("Sending file: " + keyboard.replace("UPLOAD ", ""));
-                File file = new File(clientDir+"\\"+selectedItem1);
-                FileInputStream fin = new FileInputStream(clientDir+"\\"+selectedItem1);
+                System.out.println("Sending file: " + clientDir + "\\" + selectedItem1);
+                File file = new File(clientDir + "\\" + selectedItem1);
+                FileInputStream fin = new FileInputStream(clientDir + "\\" + selectedItem1);
                 OutputStream os = socket.getOutputStream();
                 int length = (int) file.length();
                 byte[] fileBytes = new byte[length];
