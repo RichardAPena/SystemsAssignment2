@@ -9,8 +9,6 @@ public class ServerConnection extends Thread {
     BufferedReader in;
     PrintWriter out;
 
-    boolean shouldRun = true;
-
     public ServerConnection(Socket socket) throws IOException {
         super("ServerConnectionThread");
         this.s = socket;
@@ -18,6 +16,9 @@ public class ServerConnection extends Thread {
         out = new PrintWriter(socket.getOutputStream(), true);
     }
 
+    /**
+     * Executes thread as soon as a new client is accepted
+     */
     public void run() {
         try {
             String request = "";
@@ -26,7 +27,6 @@ public class ServerConnection extends Thread {
             System.out.println("REQUEST: " + request);
             if (request.equals("DIR")) {
 
-                //File serverDirectory = new File(Main.serverDir);
                 // Send client file list information
                 String[] filesList = Main.serverDir.list();
                 String fileString = "";
@@ -64,11 +64,12 @@ public class ServerConnection extends Thread {
                 out.println(length); // OUT: ARRAY LENGTH
                 System.out.println("e");
                 os.write(fileBytes, 0, length); // OUT: BYTE ARRAY
-
                 System.out.println("File sent");
 
         }
-    } catch (Exception e) {}
+    } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
