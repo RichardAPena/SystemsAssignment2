@@ -1,6 +1,8 @@
 # Project information
 
 Our project is a text file sharing system. This system uses a singular server that multiple clients can access to either download from the server, or upload to the server, using the UI.
+![Screenshot 2021-04-03 224455](https://user-images.githubusercontent.com/59979686/113497088-46630380-94ce-11eb-941a-e99d1197907d.png)
+
 
 
 # Improvements
