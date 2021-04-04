@@ -118,6 +118,10 @@ public class Main extends Application {
                 // Receive file from server
                 String fileName = in.readLine(); // IN: FILE NAME
                 FileOutputStream fout = new FileOutputStream(clientDir + "\\" + fileName);
+                File f = new File(clientDir + "\\" + fileName);
+                if( f.exists()){
+                    f.delete();
+                }
                 System.out.println("1");
                 InputStream is = s.getInputStream();
                 System.out.println("2");
