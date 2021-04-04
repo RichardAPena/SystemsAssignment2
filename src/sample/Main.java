@@ -1,18 +1,23 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
 public class Main extends Application {
 
@@ -29,7 +34,12 @@ public class Main extends Application {
     all files in the shared folder of the local client. On the right will be the list of files in the shared folder of
     the server.
     */
-
+    public int index1;
+    public int index2;
+    public String selectedItem1;
+    public String selectedItem2;
+    public File clientDir = new File("shared");
+    public File serverDir = new File("C:\\Downloads\\SERVER");
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -37,20 +47,45 @@ public class Main extends Application {
         Button uploadButton = new Button("Upload");
         ListView<String> list1 = new ListView<>();
         ListView<String> list2 = new ListView<>();
-
+        Label label1 = new Label("Selected client side item:");
+        Label label2 = new Label("Selected server side item:");
         HBox hbox1 = new HBox(downloadButton,uploadButton);
         HBox hbox2 = new HBox(list1,list2);
-        VBox vbox = new VBox(hbox1,hbox2);
-        File clientDir = new File("shared");
-        File serverDir = new File("C:\\Downloads\\SERVER");
+        VBox vbox = new VBox(hbox1,hbox2,label1,label2);
+
+
+
         ObservableList<String> items1 = FXCollections.observableArrayList (clientDir.list());
         ObservableList<String> items2 = FXCollections.observableArrayList (serverDir.list());
         list1.setItems(items1);
         list2.setItems(items2);
+        list1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
+            selectedItem1 = list1.getSelectionModel().getSelectedItem();
+            index2 = list1.getSelectionModel().getSelectedIndex();
+            label1.setText("Selected item: " + selectedItem1);
+            System.out.println("Item selected : " + selectedItem1 + ", Item index : " + index1);
+        });
+        list2.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
+            selectedItem2 = list2.getSelectionModel().getSelectedItem();
+            index1 = list2.getSelectionModel().getSelectedIndex();
+            label2.setText("Selected client side item: " + selectedItem2);
+            System.out.println("Item server side selected : " + selectedItem2 + ", Item index : " + index2);
+        });
+
+        downloadButton.setOnAction(e -> {
+
+
+        });
+        uploadButton.setOnAction(e -> {
+
+
+        });
+
+
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Assignment 2");
-        primaryStage.setScene(new Scene(vbox, 500, 500));
+        primaryStage.setScene(new Scene(vbox, 800, 500));
         primaryStage.show();
     }
 
