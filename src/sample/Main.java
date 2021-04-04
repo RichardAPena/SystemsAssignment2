@@ -108,8 +108,8 @@ public class Main extends Application {
         downloadButton.setOnAction(e -> {
             try {
                 Socket socket = new Socket("localhost", PORT);
-                BufferedReader inn = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                PrintWriter outt = new PrintWriter(s.getOutputStream(), true);
+                BufferedReader inn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                PrintWriter outt = new PrintWriter(socket.getOutputStream(), true);
 
                 outt.println("DOWNLOAD" + selectedItem2);
                 // Receive file from server
