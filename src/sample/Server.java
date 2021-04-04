@@ -11,12 +11,29 @@ public class Server {
     private final static int PORT = 4999;
     private static ArrayList<ClientHandler> clients = new ArrayList<>();
     private static ExecutorService pool = Executors.newFixedThreadPool(4);
+    private static ArrayList<ServerConnection> connections = new ArrayList<>();
 
     //private final static String FILENAME = "C:\\Downloads\\test.txt";
     private final static String DIRECTORY = "C:\\Downloads\\SERVER";
+    private static boolean shouldRun;
 
-    public static void main(String[] args) throws IOException {
+    //boolean shouldRun = true;
+
+    public static void main(String[] args) throws IOException { // main
         ServerSocket ss = new ServerSocket(PORT);
+
+        try {
+            System.out.println("Waiting for client");
+            while (shouldRun) {
+                Socket s = ss.accept();
+                ServerConnection sc = new ServerConnection(s);
+                System.out.println("Client accepted");
+                connections.add(sc);
+            }
+        } catch (Exception e) {}
+
+        // =============================== STUFF BELOW
+
         System.out.println("Waiting for client");
         Socket s = ss.accept();
         System.out.println("Client accepted");
@@ -71,5 +88,5 @@ public class Server {
                 System.out.println("File sent");
             }
         }
-    }
+    } // main
 }
