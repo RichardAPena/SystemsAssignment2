@@ -54,8 +54,8 @@ public class ServerConnection extends Thread {
 
                 // Send file to client
                 System.out.println("Sending file: " + request.replace("DOWNLOAD ", ""));
-                File file = new File(request.replace("DOWNLOAD ", ""));
-                FileInputStream fin = new FileInputStream(request.replace("DOWNLOAD ", ""));
+                File file = new File(Main.serverDir+"\\"+request.replace("DOWNLOAD ", ""));
+                FileInputStream fin = new FileInputStream(Main.serverDir+"\\"+request.replace("DOWNLOAD ", ""));
                 OutputStream os = s.getOutputStream();
                 int length = (int) file.length();
                 byte[] fileBytes = new byte[length];
