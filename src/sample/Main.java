@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.net.Socket;
 
 public class Main extends Application {
 
@@ -30,6 +31,8 @@ public class Main extends Application {
     all files in the shared folder of the local client. On the right will be the list of files in the shared folder of
     the server.
     */
+    private final static String HOST = "localhost";
+    private final static int PORT = 13337;
     public int index1;
     public int index2;
     public String selectedItem1;
@@ -38,8 +41,16 @@ public class Main extends Application {
     public static File serverDir = new File("C:\\Downloads\\SERVER");
     public TextArea preview1 = new TextArea();
     public TextArea preview2 = new TextArea();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        Socket s = new Socket("localhost", PORT);
+        BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+        out.println("DIR");
+        String[] sArr = in.readLine().split(":");
+
         preview1.setEditable(false);
         preview2.setEditable(false);
         Button downloadButton = new Button("Download");
@@ -57,7 +68,7 @@ public class Main extends Application {
 
 
         ObservableList<String> items1 = FXCollections.observableArrayList (clientDir.list());
-        ObservableList<String> items2 = FXCollections.observableArrayList (serverDir.list());
+        ObservableList<String> items2 = FXCollections.observableArrayList (sArr);
         list1.setItems(items1);
         list2.setItems(items2);
         list1.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> ov, String oldVal, String newVal) -> {
