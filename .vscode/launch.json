@@ -6,16 +6,23 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "sample.Main",
+            "projectName": "SystemsAssignment2_e5623e17"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
-            "vmArgs": "--module-path C:/Java/javafx-sdk-15.0.1/lib --add-modules javafx.controls,javafx.fxml", 
+            "vmArgs": "--module-path K:/programming/javafx-sdk-11.0.2 --add-modules javafx.controls,javafx.fxml",
             "mainClass": "${file}"
         },
         {
             "type": "java",
             "name": "Launch Client",
             "request": "launch",
-            "vmArgs": "--module-path C:/Java/javafx-sdk-15.0.1/lib --add-modules javafx.controls,javafx.fxml", 
+            "vmArgs": "--module-path K:/programming/javafx-sdk-11.0.2 --add-modules javafx.controls,javafx.fxml",
             "mainClass": "sample.Client",
             "projectName": "SystemsAssignment2_f6a45e0f"
         },
@@ -23,7 +30,7 @@
             "type": "java",
             "name": "Launch Main",
             "request": "launch",
-            "vmArgs": "--module-path C:/Java/javafx-sdk-15.0.1/lib --add-modules javafx.controls,javafx.fxml", 
+            "vmArgs": "--module-path K:/programming/javafx-sdk-11.0.2 --add-modules javafx.controls,javafx.fxml",
             "mainClass": "sample.Main",
             "projectName": "SystemsAssignment2_f6a45e0f"
         },
@@ -31,7 +38,7 @@
             "type": "java",
             "name": "Launch Server",
             "request": "launch",
-            "vmArgs": "--module-path C:/Java/javafx-sdk-15.0.1/lib --add-modules javafx.controls,javafx.fxml", 
+            "vmArgs": "--module-path K:/programming/javafx-sdk-11.0.2 --add-modules javafx.controls,javafx.fxml",
             "mainClass": "sample.Server",
             "projectName": "SystemsAssignment2_f6a45e0f"
         }

@@ -37,7 +37,7 @@ public class Main extends Application {
     public int index2;
     public String selectedItem1;
     public String selectedItem2;
-    public File clientDir = new File("shared");
+    public File clientDir = new File("clientDir");
     public static File serverDir = new File("C:\\Downloads\\SERVER");
     public TextArea preview1 = new TextArea();
     public TextArea preview2 = new TextArea();
@@ -137,8 +137,7 @@ public class Main extends Application {
                 System.out.println("6");
                 System.out.println("File received");
 
-                fout.close();
-                is.close();
+
                 in.close();
                 out.close();
 

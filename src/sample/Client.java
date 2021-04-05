@@ -62,7 +62,7 @@ public class Client {
                 int length = Integer.parseInt(in.readLine()); // IN: ARRAY LENGTH
                 //System.out.println("LENGTH " + length);
                 byte[] fileBytes = new byte[length];
-                is.read(fileBytes,0, length); // IN: BYTE ARRAY
+                is.read(fileBytes); // IN: BYTE ARRAY
                 fout.write(fileBytes, 0, length);
                 //fout.write(fileBytes, 0, length);
                 System.out.println("File received");
