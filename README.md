@@ -12,7 +12,7 @@ To improve upon the base UI for this system, we added Labels to remind the user 
 
 # How-to-run
 
-1. Before running the program, make sure the directory C:\Downloads\serverDir exists (or edit the code to change the desired server directory location)
+1. Before running the program, make sure the directory C:\Downloads\SERVER exists (or edit the code to change the desired server directory location)
 2. Put any files you wish to upload to the server into the clientDir directory.
 3. Run Server.java
 4. Run Main.java
