@@ -1,3 +1,5 @@
+ - Richard Pena 100744224 
+ - Samih Ejel 100751430
 # Project information
 
 Our project is a text file sharing system. This system uses a singular server that multiple clients can access to either download from the server, or upload to the server, using the UI.
